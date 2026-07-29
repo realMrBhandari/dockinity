@@ -1,0 +1,33 @@
+# IDE Settings
+.vscode/
+.idea/
+
+# Python runtime files
+__pycache__/
+*.py[cod]
+*.pyo
+
+#  Sandbox 
+sandbox/
+sandbox.py
+
+# Virtual Environments & Environment Variables
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Molecular structures
+*.pdb
+*.sdf
+*.pdbqt
+*.mol2
+
+# Databases & temp storages
+*.sqlite3
+*.json
+
+# SASS Source Maps
+*.css.map
+
