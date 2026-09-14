@@ -31,3 +31,6 @@ env/
 # SASS Source Maps
 *.css.map
 
+# watchers 
+watch-sass.js
+
