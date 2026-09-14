@@ -1,0 +1,67 @@
+<div class="protein-config-wrapper">
+  <legend>
+    Configure Receptor Components<span class="docking-request__form-required">*</span>
+  </legend>
+  <div class="help_text">
+    Select components to retain in receptor <strong>{{ pdb_id }}</strong> for
+    docking.
+  </div>
+  {% for keys, values in pdb_structure.items %}
+    {% if keys == 'chains' %}
+      {% for key, value in values.items %}
+        <div class="receptor-entitiy-wrapper">
+          <input class="docking-request__form-input docking-request__form-input-checkbox"
+                 type="checkbox"
+                 name="protein_component_chains"
+                 value="{{ key }}"
+                 id="chain-{{ key }}" />
+          <label for="chain-{{ key }}">Chain: {{ value }}</label>
+        </div>
+      {% endfor %}
+    {% elif keys == 'ligands' %}
+      {% for key, value in values.items %}
+        <div class="receptor-entitiy-wrapper">
+          <input class="docking-request__form-input docking-request__form-input-checkbox"
+                 type="checkbox"
+                 name="protein_component_ligands"
+                 value="{{ key }}"
+                 id="ligand-{{ key }}" />
+          <label for="ligand-{{ key }}">Ligand: {{ value }}</label>
+        </div>
+      {% endfor %}
+    {% elif keys == 'cofactors' %}
+      {% for key, value in values.items %}
+        <div class="receptor-entitiy-wrapper">
+          <input class="docking-request__form-input docking-request__form-input-checkbox"
+                 type="checkbox"
+                 name="protein_component_cofactor"
+                 value="{{ key }}"
+                 id="cofactor-{{ key }}" />
+          <label for="cofactor-{{ key }}">Cofactor: {{ value }}</label>
+        </div>
+      {% endfor %}
+    {% elif keys == 'metal_ions' %}
+      {% for key, value in values.items %}
+        <div class="receptor-entitiy-wrapper">
+          <input class="docking-request__form-input docking-request__form-input-checkbox"
+                 type="checkbox"
+                 name="protein_component_metal_ions"
+                 value="{{ key }}"
+                 id="metal-ions-{{ key }}" />
+          <label for="metal-ions-{{ key }}">Metal Ions: {{ value }}</label>
+        </div>
+      {% endfor %}
+    {% elif keys == 'other_hetero' %}
+      {% for key, value in values.items %}
+        <div class="receptor-entitiy-wrapper">
+          <input class="docking-request__form-input docking-request__form-input-checkbox"
+                 type="checkbox"
+                 name="protein_component_hetatm"
+                 value="{{ key }}"
+                 id="HETATM-{{ key }}" />
+          <label for="HETATM-{{ key }}">HETATM: {{ key }} ({{ value }})</label>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+</div>

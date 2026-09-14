@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Dockinity 404 ERROR</title>
+        <!-- Google font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap"
+              rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/404.css' %}" />
+    </head>
+    <body>
+        <div id="notfound">
+            <div class="notfound">
+                <div class="notfound-404">
+                    <h1>404</h1>
+                </div>
+                <h2>Oops! Nothing was found</h2>
+                <p>
+                    The page you are looking for might have been removed, renamed, is temporarily unavailable, or may never have existed in the first place.
+                    <a href="{% url 'dockinity-home' %}">Return to homepage</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

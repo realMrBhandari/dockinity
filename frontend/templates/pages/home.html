@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+  <section class="site-hero">
+    <div class="site-hero__col-1">
+      <h1 class="site-hero__title">Protein-ligand docking without the setup</h1>
+      <p class="site-hero__paragraph">
+        Dockinity performs molecular docking for you. Submit your protein and ligand inputs. Get docking scores and predicted binding structures in just few clicks, with no local setup or compute clusters required.
+      </p>
+      <div class="site-hero__cta">
+        <a href="{% url 'new-docking-request' %}"
+           class="site-hero__cta-button no-select">
+          <span>Start Docking</span>
+          <span class="site-hero__cta-button-icon">
+            <svg width="20"
+                 height="20"
+                 fill="#000000"
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 256 256">
+              <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z">
+              </path>
+            </svg>
+          </span>
+        </a>
+        <a href="{% url 'docking-result_search' %}"
+           class="site-hero__cta-link no-select">Retrieve Results</a>
+      </div>
+    </div>
+    <div class="viewer-hud-wrapper">
+      <div class="hud-badge hud-badge--top-right">RECEPTOR STRUCTURE PDB • 4MKC</div>
+      <div class="hud-badge hud-badge--bottom-left">Affinity: -8.4 kcal/mol</div>
+      <div id="dockinity-molecule"
+           class="viewer_3Dmoljs"
+           data-pdb="4MKC"
+           data-style1="cartoon:color=spectrum"
+           data-select2="hetflag:true"
+           data-style2="stick:radius=0.22"
+           data-backgroundcolor="transparent"
+           data-backgroundalpha="opaque: 1.0"></div>
+    </div>
+  </section>
+  <footer class="site-footer">
+    <svg class="site-footer__watermark-svg"
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 80 80"
+         fill="none">
+      <g>
+      <path d="M59.1198 6.896H20.8798L1.75977 40.0001L20.8798 73.1041H59.1198L78.2398 40.0001L59.1198 6.896Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.185 9.85596H24.369L6.96094 39.9999L24.369 70.1439H59.185L76.593 39.9999L59.185 9.85596Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.2482 12.8159H27.8562L12.1602 39.9999L27.8562 67.1839H59.2482L74.9442 39.9999L59.2482 12.8159Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.3114 15.7764H31.3434L17.3594 40.0003L31.3434 64.2243H59.3114L73.2954 40.0003L59.3114 15.7764Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.3925 18.7358H34.8325L22.5605 39.9998L34.8325 61.2638H59.3925L71.6645 39.9998L59.3925 18.7358Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.4558 21.6963H38.3198L27.7598 40.0003L38.3198 58.3043H59.4558L70.0158 40.0003L59.4558 21.6963Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.5209 24.6719H41.8089L32.9609 39.9999L41.8089 55.3279H59.5209L68.3689 39.9999L59.5209 24.6719Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.5842 27.6318H45.2962L38.1602 39.9998L45.2962 52.3678H59.5842L66.7202 39.9998L59.5842 27.6318Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.6474 30.5923H48.7834L43.3594 40.0003L48.7834 49.4083H59.6474L65.0874 40.0003L59.6474 30.5923Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      <path d="M59.7285 33.5518H52.2725L48.5605 39.9998L52.2725 46.4478H59.7285L63.4405 39.9998L59.7285 33.5518Z" stroke="currentColor" stroke-width="0.8" stroke-miterlimit="10" />
+      </g>
+    </svg>
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <div class="site-footer__brand-row">
+          <p class="site-footer__wordmark">DOCKINITY</p>
+        </div>
+        <p class="site-footer__description">
+          Protein-ligand docking without the setup. Submit inputs, get binding scores and structures.
+        </p>
+      </div>
+      <div class="site-footer__columns">
+        <div>
+          <p class="site-footer__column-label">SITE</p>
+          <div class="site-footer__link-list">
+            <a class="site-footer__link" href="{% url 'dockinity-home' %}">Overview</a>
+            <a class="site-footer__link" href="{% url 'new-docking-request' %}">Molecular docking</a>
+            <a class="site-footer__link" href="{% url 'docking-result_search' %}">Results</a>
+          </div>
+        </div>
+        <div>
+          <p class="site-footer__column-label">LEGAL</p>
+          <div class="site-footer__link-list">
+            <a class="site-footer__link" href="#">Privacy policy</a>
+            <a class="site-footer__link" href="#">Terms and conditions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">&copy; 2026 Sumit Singh Bhandari. All rights reserved.</p>
+      <div class="site-footer__bottom-right">
+        <p class="site-footer__credit">Built and maintained by <a href="https://www.linkedin.com/in/sumitsinghb1601/"
+    class="site-footer__credit-name">Sumit Singh Bhandari</a></p>
+        <div class="site-footer__social-list">
+          <a class="site-footer__social-link"
+             target="_blank"
+             href="https://github.com/realMrBhandari"
+             aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+              <path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" />
+            </svg>
+          </a>
+          <a class="site-footer__social-link"
+             target="_blank"
+             href="https://www.linkedin.com/in/sumitsinghb1601/"
+             aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+              <rect x="4" y="4" width="16" height="16" rx="2" /><line x1="8" y1="11" x2="8" y2="16" /><line x1="8" y1="8" x2="8" y2="8" />
+              <path d="M12 16v-3a2 2 0 0 1 4 0v3" />
+              <line x1="12" y1="11" x2="12" y2="16" />
+            </svg>
+          </a>
+          <a class="site-footer__social-link"
+             target="_blank"
+             href="mailto:sumitsinghb1601@gmail.com"
+             aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+{% endblock %}
+{% block page_javascript %}
+  <script src="{% static 'js/molAnimationMobile.js' %}"></script>
+  <script src="{% static 'js/molAnimation.js' %}"></script>
+{% endblock %}

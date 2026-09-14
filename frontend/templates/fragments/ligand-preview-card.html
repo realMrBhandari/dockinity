@@ -1,0 +1,26 @@
+<div class="fetched__ligand-card" id="ligand-card-{{ ligand_card_id }}">
+  <img src="https://pubchem.ncbi.nlm.nih.gov/image/img3d.cgi?cid={{ ligand_cid }}"
+       alt=""
+       class="fetched__ligand-image" />
+  <div class="fetched__ligand-details-wrapper">
+    <p class="fetched__ligand-name">{{ ligand_name }}</p>
+    <p class="fetched__ligand-cid">{{ ligand_cid }}</p>
+    <div class="fetched__ligand-adme">
+      <p class="fetched__ligand-adme-mass">
+        M. Weight: <span class="adme-value">{{ ligand_weight }}</span>g/mol
+      </p>
+      <p class="fetched__ligand-adme-XLogP3-AA">
+        XLogP3-AA: <span class="adme-value">{{ ligand_logp }}</span>
+      </p>
+      <p class="fetched__ligand-adme-hbDonor">
+        HB Donor: <span class="adme-value">{{ ligand_hdb }}</span>
+      </p>
+      <p class="fetched__ligand-adme-hbAcceptor">
+        HB Acceptor: <span class="adme-value">{{ ligand_hba }}</span>
+      </p>
+    </div>
+    <a href="https://pubchem.ncbi.nlm.nih.gov/compound/{{ ligand_cid }}"
+       class="pubchem-url"
+       target="_blank">PubChem &rarr;</a>
+  </div>
+</div>

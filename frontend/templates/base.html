@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5YMXX7CFR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-P5YMXX7CFR');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+          content="Dockinity is a molecular docking web platform for protein-ligand docking. Configure docking experiments, submit molecular structures, and retrieve binding scores and predicted binding poses without local setup." />
+    <meta name="keywords"
+          content="molecular docking,
+          protein-ligand docking,
+          protein ligand interaction,
+          computational drug discovery,
+          structure based drug design,
+          virtual screening,
+          molecular modeling,
+          molecular simulation,
+          ligand docking,
+          receptor ligand docking,
+          protein structure analysis,
+          binding affinity prediction,
+          binding energy calculation,
+          docking score,
+          docking pose,
+          binding pose prediction,
+          molecular docking software,
+          online molecular docking,
+          molecular docking web server,
+          docking platform,
+          computational chemistry,
+          cheminformatics,
+          bioinformatics,
+          structural biology,
+          drug discovery platform,
+          in silico drug discovery,
+          computer aided drug design,
+          CADD,
+          virtual drug screening,
+          ligand binding prediction,
+          protein binding site,
+          molecular interaction analysis,
+          AutoDock Vina,
+          docking workflow,
+          automated molecular docking,
+          web based molecular docking,
+          no local installation docking,
+          Dockinity
+      " />
+    <meta name="author" content="Sumit Singh Bhandari" />
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
+            integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
+            crossorigin="anonymous"></script>
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+    <script src="https://3Dmol.org/build/3Dmol.ui-min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block page_css %}{% endblock %}
+    <link rel="icon" href="{% static 'img/favicon-dockinity.ico' %}">
+    <title>Dockinity</title>
+  </head>
+  <body>
+    <!-- NAVIGATION BAR  -->
+    <header class="navbar">
+      <div class="navbar__inner">
+        <a class="navbar__logo">
+          <span class="navbar__logo-text">
+            <span class="navbar__logo-text--main no-select">DOCKINITY</span>
+            <span class="navbar__logo-text--sub no-select">Docking Web Server</span>
+          </span>
+        </a>
+        <!-- Desktop Navigation -->
+        <nav class="navbar__nav" aria-label="Main navigation">
+          <ul class="navbar__list">
+            <li class="no-select navbar__item {% if active_page == 'home' %}navbar__item--active{% endif %}">
+              <a href="{% url 'dockinity-home' %}" class="navbar__link no-select">Overview</a>
+            </li>
+            <li class="no-select navbar__item {% if active_page == 'docking' %}navbar__item--active{% endif %}">
+              <a href="{% url 'new-docking-request' %}" class="navbar__link no-select">Molecular Docking</a>
+            </li>
+            <li class="no-select navbar__item {% if active_page == 'results' %}navbar__item--active{% endif %}">
+              <a href="{% url 'docking-result_search' %}"
+                 class="navbar__link no-select">Results</a>
+            </li>
+            {% comment %} <li class="navbar__item {% if active_page == 'about' %}navbar__item--active{% endif %}">
+              <a href="{% url 'docking-result' %}" class="navbar__link">Resources</a>
+            </li> {% endcomment %}
+          </ul>
+        </nav>
+        <!-- Mobile Menu Button -->
+        <button class="navbar__toggle"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false">
+          <span class="navbar__toggle-icon navbar__toggle-icon--menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="navbar__toggle-icon navbar__toggle-icon--close">
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+      <!-- Mobile Navigation -->
+      <div class="navbar__mobile-menu">
+        <nav class="navbar__mobile-nav" aria-label="Mobile navigation">
+          <ul class="navbar__list">
+            <li class="navbar__item {% if active_page == 'home' %}navbar__item--active{% endif %}">
+              <a href="{% url 'dockinity-home' %}" class="navbar__link no-select">Overview</a>
+            </li>
+            <li class="navbar__item {% if active_page == 'docking' %}navbar__item--active{% endif %}">
+              <a href="{% url 'new-docking-request' %}" class="navbar__link no-select">Molecular Docking</a>
+            </li>
+            <li class="navbar__item {% if active_page == 'results' %}navbar__item--active{% endif %}">
+              <a href="{% url 'docking-result_search' %}"
+                 class="navbar__link no-select">Results</a>
+            </li>
+            {% comment %} <li class="navbar__item {% if active_page == 'about' %}navbar__item--active{% endif %}">
+              <a href="#" class="navbar__link">Resources</a>
+            </li> {% endcomment %}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- NAVIGATION BAR  -->
+    <main class="app-main">
+      <div class="htmx-swap-area" id="django-app-content">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+  </body>
+  <script src="{% static 'js/navbarTranspartOnScroll.js' %}"></script>
+  {% block page_javascript %}{% endblock %}
+</html>

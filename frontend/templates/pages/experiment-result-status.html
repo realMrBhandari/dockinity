@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/experiment-result-status.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="report-page-content-wrapper report-page-content-wrapper--queued">
+        <div class="search-report-wrapper">
+            <form method="get"
+                  action="{% url 'docking-result_report' %}"
+                  class="search-report__search-bar">
+                <label for="search-input" class="search-bar__label">Search another result</label>
+                <div class="search-bar__input-wrapper">
+                    <input class="search-bar__input"
+                           type="text"
+                           name="experiment_id"
+                           minlength="28"
+                           maxlength="28"
+                           placeholder="e.g. DKN-2026-0847"
+                           id="experiment-id-field">
+                    <button id="fetch-results" class="search-bar__btn-submit" type="submit">
+                        <svg class="search-bar__btn-submit-icon"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="32"
+                             height="32"
+                             fill="#000000"
+                             viewBox="0 0 256 256">
+                            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="report">
+            {% if fetched_data.experiment_status == "QUEUED" %}
+                <div class="info-banner info-banner--queued" id="info-banner">
+                    <svg class="info-banner__icon icon-queued"
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="32"
+                         height="32"
+                         fill="#000000"
+                         viewBox="0 0 256 256">
+                        <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z">
+                        </path>
+                    </svg>
+                    <div class="info-banner-text-wrapper">
+                        <p class="info-banner__info-text info-banner__info-text-main">Experiment Queued</p>
+                        <p class="info-banner__info-text info-banner__info-text-sub">Your experiment has been submitted and is in the queue, you will be notified through email once the experiment completes.</p>
+                    </div>
+                </div>
+            {% elif fetched_data.experiment_status == "FAILED" %}
+                <div class="info-banner info-banner--failed" id="info-banner">
+                    <svg class="info-banner__icon icon--failed"
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="32"
+                         height="32"
+                         fill="#000000"
+                         viewBox="0 0 256 256">
+                        <path d="M120,136V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0ZM232,91.55v72.9a15.86,15.86,0,0,1-4.69,11.31l-51.55,51.55A15.86,15.86,0,0,1,164.45,232H91.55a15.86,15.86,0,0,1-11.31-4.69L28.69,175.76A15.86,15.86,0,0,1,24,164.45V91.55a15.86,15.86,0,0,1,4.69-11.31L80.24,28.69A15.86,15.86,0,0,1,91.55,24h72.9a15.86,15.86,0,0,1,11.31,4.69l51.55,51.55A15.86,15.86,0,0,1,232,91.55Zm-16,0L164.45,40H91.55L40,91.55v72.9L91.55,216h72.9L216,164.45ZM128,160a12,12,0,1,0,12,12A12,12,0,0,0,128,160Z">
+                        </path>
+                    </svg>
+                    <div class="info-banner-text-wrapper">
+                        <p class="info-banner__info-text info-banner__info-text-main">Experiment Failed</p>
+                        <p class="info-banner__info-text info-banner__info-text-sub">The docking run could not be completed. You can review the inputs below or submit a new exprement.</p>
+                    </div>
+                </div>
+            {% endif %}
+            <header class="report__header">
+                <div class="header-row-1 header-row">
+                    <div class="report__header-meta">
+                        <p class="report__header-label">Experiment ID</p>
+                        <h1 class="report__header-title">{{ fetched_data.experiment_id }}</h1>
+                        {% if fetched_data.experiment_status == "QUEUED" %}
+                            <p class="report__header-datetime"><span class="pulsating-dot pulsating-dot--queued"></span>QUEUED At {{ fetched_data.created_at|date:"d M Y, h:i A" }} IST</p>
+                        {% elif fetched_data.experiment_status == "FAILED" %}
+                            <p class="report__header-datetime"><span class="pulsating-dot pulsating-dot--failed"></span>FAILED At {{ fetched_data.completed_at|date:"d M Y, h:i A" }} IST</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="header-row-2 header-row">
+                    <p class="report__header-label">Description</p>
+                    <p class="report__header-description">{{ fetched_data.experiment_description }}</p>
+                </div>
+            </header>
+            <!-- Experiment Parameters -->
+            <section class="report__metrics-tier">
+                <h3 class="tier-title">Experiment Parameters</h3>
+                <div class="metrics-strip">
+                    <div class="metric-block">
+                        <p class="metric-label">Protein Target</p>
+                        <div class="metric-value-group">
+                            <p class="metric-value">6LU7</p>
+                            <div class="metric-tags">
+                                {% for key, values in fetched_data.receptor_components.items %}
+                                    {% if key == "chains" %}
+                                        {% for value in values %}
+                                            <span class="tag tag--primary">Chain {{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "ligands" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "cofactors" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "metal_ions" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "other_hetero" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %}  {% endcomment %}
+                    <div class="metric-divider"></div>
+                    {% comment %}  {% endcomment %}
+                    <div class="metric-block">
+                        <p class="metric-label">Ligands Submitted</p>
+                        <p class="metric-value">{{ total_ligands }}</p>
+                        <div class="metric-tags">
+                            {% for ligand in fetched_data.ligands %}
+                                <span class="tag">{{ ligand }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="metric-divider"></div>
+                    {% comment %} metric-block--highlight {% endcomment %}
+                    <div class="metric-block">
+                        <p class="metric-label">Docking type</p>
+                        {% if fetched_data.docking_mode == "SITE_SPECIFIC" %}
+                            <p class="metric-value">Site Specific</p>
+                        {% elif fetched_data.docking_mode == "BLIND" %}
+                            <p class="metric-value">Blind Docking</p>
+                        {% endif %}
+                        <p class="metric-sub">AutoDock Vina (v1.2.7)</p>
+                    </div>
+                </div>
+            </section>
+            {% if fetched_data.docking_mode == "SITE_SPECIFIC" %}
+                <section class="report__metrics-tier report__metrics-tier--search-space">
+                    <div class="search-space-container">
+                        <div class="search-space-wrapper">
+                            <p class="search-space-lbl">Grid Box Center (Å)</p>
+                            <div class="search-space-box">
+                                <div class="coord-col">
+                                    <span class="coord-axis">X</span>
+                                    <span class="coord-num">{{ fetched_data.center_x }}</span>
+                                </div>
+                                <div class="coord-col">
+                                    <span class="coord-axis">Y</span>
+                                    <span class="coord-num">{{ fetched_data.center_y }}</span>
+                                </div>
+                                <div class="coord-col">
+                                    <span class="coord-axis">Z</span>
+                                    <span class="coord-num">{{ fetched_data.center_z }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search-space-wrapper">
+                            <p class="search-space-lbl">Grid Box Size (Å)</p>
+                            <div class="search-space-box">
+                                <div class="coord-col">
+                                    <span class="coord-axis">X</span>
+                                    <span class="coord-num">{{ fetched_data.size_x }}</span>
+                                </div>
+                                <div class="coord-col">
+                                    <span class="coord-axis">Y</span>
+                                    <span class="coord-num">{{ fetched_data.size_y }}</span>
+                                </div>
+                                <div class="coord-col">
+                                    <span class="coord-axis">Z</span>
+                                    <span class="coord-num">{{ fetched_data.size_z }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+    </div>
+    {% block page_javascript %}
+        <script src="{% static 'js/validateSearchResultQuery.js' %}"></script>
+    {% endblock %}
+{% endblock %}

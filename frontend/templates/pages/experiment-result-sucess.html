@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/experiment-result-sucess.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="report-page-content-wrapper">
+        <div class="search-report-wrapper">
+            <form method="get"
+                  action="{% url 'docking-result_report' %}"
+                  class="search-report__search-bar">
+                <label for="search-input" class="search-bar__label">Search another result</label>
+                <div class="search-bar__input-wrapper">
+                    <input class="search-bar__input"
+                           type="text"
+                           name="experiment_id"
+                           minlength="28"
+                           maxlength="28"
+                           placeholder="e.g. DKN-2026-0847"
+                           id="experiment-id-field">
+                    <button id="fetch-results" class="search-bar__btn-submit" type="submit">
+                        <svg class="search-bar__btn-submit-icon"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="32"
+                             height="32"
+                             fill="#000000"
+                             viewBox="0 0 256 256">
+                            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="report">
+            {% if experiment_meta.duration <= 3.00 %}
+                <div class="info-banner" id="info-banner">
+                    <svg class="info-banner__icon"
+                         xmlns="http://www.w3.org/2000/svg"
+                         width="32"
+                         height="32"
+                         fill="#000000"
+                         viewBox="0 0 256 256">
+                        <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z">
+                        </path>
+                    </svg>
+                    <div class="info-banner-text-wrapper">
+                        <p class="info-banner__info-text">Docked structures can be exported for up to 3 days after completion. After this period, they are permanently removed and can no longer be downloaded.</p>
+                    </div>
+                    <button class="info-banner__close" type="button" id="close-banner">
+                        <svg class="info-banner__close-icon"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="32"
+                             height="32"
+                             fill="#000000"
+                             viewBox="0 0 256 256">
+                            <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            {% endif %}
+            <header class="report__header">
+                <div class="header-row-1 header-row">
+                    <div class="report__header-meta">
+                        <p class="report__header-label">Experiment ID</p>
+                        <h1 class="report__header-title">{{ experiment_meta.experiment_id }}</h1>
+                        <p class="report__header-datetime"><span class="pulsating-dot pulsating-dot--successful"></span> Completed {{ experiment_meta.completed_at|date:"d M Y, h:i A" }} IST</p>
+                    </div>
+                    <div class="report__header-cta">
+                        {% if experiment_meta.duration <= 3.00 %}
+                            <form action="{{ experiment_meta.docked_structures_url }}"
+                                  method="post"
+                                  class="report__header-form-pdbqt">
+                                <button class="cta-btn__pdbqt cta-btn__download no-select" type="submit">
+                                    <svg class="cta-btn__icon"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         width="32"
+                                         height="32"
+                                         fill="#000000"
+                                         viewBox="0 0 256 256">
+                                        <path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z">
+                                        </path>
+                                    </svg>Download Structures
+                                </button>
+                            </form>
+                        {% endif %}
+                        <form action="{% url 'docking-result_export' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden"
+                                   name="experiment_id"
+                                   value="{{ experiment_meta.experiment_id }}">
+                            <button class="cta-btn__csv cta-btn__download no-select" type="submit">
+                                <svg class="cta-btn__icon"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     width="32"
+                                     height="32"
+                                     fill="#000000"
+                                     viewBox="0 0 256 256">
+                                    <path d="M216,112v96a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V112A16,16,0,0,1,56,96H80a8,8,0,0,1,0,16H56v96H200V112H176a8,8,0,0,1,0-16h24A16,16,0,0,1,216,112ZM93.66,69.66,120,43.31V136a8,8,0,0,0,16,0V43.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,69.66Z">
+                                    </path>
+                                </svg>
+                                Export CSV
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="header-row-2 header-row">
+                    <p class="report__header-label">Description</p>
+                    <p class="report__header-description">{{ experiment_meta.experiment_description }}</p>
+                </div>
+            </header>
+            <!-- TIER 1: Primary Results -->
+            <section class="report__metrics-tier">
+                <h3 class="tier-title">Overview & Results</h3>
+                <div class="metrics-strip">
+                    <div class="metric-block">
+                        <p class="metric-label">Protein Target</p>
+                        <div class="metric-value-group">
+                            <p class="metric-value">{{ experiment_meta.receptor }}</p>
+                            <div class="metric-tags">
+                                {% for key, values in experiment_meta.receptor_components.items %}
+                                    {% if key == "chains" %}
+                                        {% for value in values %}
+                                            <span class="tag tag--primary">Chain {{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "ligands" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "cofactors" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "metal_ions" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% elif key == "other_hetero" %}
+                                        {% for value in values %}
+                                            <span class="tag">{{ value }}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-block">
+                        <p class="metric-label">Ligands Processed</p>
+                        <p class="metric-value">{{ ligand_metadata.total_docked }} <span class="metric-unit">of {{ ligand_metadata.total_ligands }}</span></p>
+                        {% if ligand_metadata.failed_ligands == 1 %}
+                            <p class="metric-sub metric-sub--error">{{ ligand_metadata.failed_ligands }} ligand failed to dock</p>
+                        {% elif ligand_metadata.failed_ligands > 1 %}
+                            <p class="metric-sub metric-sub--error">{{ ligand_metadata.failed_ligands }} ligands failed to dock</p>
+                        {% elif ligand_metadata.failed_ligands == 0 %}
+                            <p class="metric-sub metric-sub--success">All {{ ligand_metadata.total_docked }} dockings successful</p>
+                        {% endif %}
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-block metric-block--highlight">
+                        <p class="metric-label">Best Binding Affinity</p>
+                        {% for key, val in ligand_result.items %}
+                            {% if forloop.first and val.docking_status == "DOCKED" %}
+                                <p class="metric-value">
+                                    {{ val.results.0.affinity }}
+                                    <span class="metric-unit">kcal/mol</span>
+                                </p>
+                                <p class="metric-sub"><span class="metric-sub-label">Top Ligand:</span> CID {{ key }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <!-- TIER 2: Configuration -->
+            <section class="report__metrics-tier">
+                <h3 class="tier-title">Run Configuration</h3>
+                <div class="metrics-strip">
+                    <div class="metric-block">
+                        <p class="metric-label">Docking Engine</p>
+                        <p class="metric-value">AutoDock Vina</p>
+                        <p class="metric-sub">v1.2.7</p>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-block">
+                        <p class="metric-label">Docking Mode</p>
+                        {% if experiment_meta.docking_mode == "SITE_SPECIFIC" %}
+                            <p class="metric-value">Site Specific</p>
+                            <p class="metric-sub">User-defined pocket</p>
+                        {% elif experiment_meta.docking_mode == "BLIND" %}
+                            <p class="metric-value">Blind</p>
+                            <p class="metric-sub">Protein-derived coordinates</p>
+                        {% endif %}
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric-block metric-block--coords">
+                        <p class="metric-label">Search Space (Å)</p>
+                        <div class="coord-grid">
+                            <span class="coord-lbl">Center (X,Y,Z)</span>
+                            <span class="coord-val">{{ experiment_meta.center_x }}, {{ experiment_meta.center_y }}, {{ experiment_meta.center_z }}</span>
+                            <span class="coord-lbl">Size (X,Y,Z)</span>
+                            <span class="coord-val">{{ experiment_meta.size_x }}, {{ experiment_meta.size_y }}, {{ experiment_meta.size_z }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="docking-summary__section">
+                <h3 class="docking-summary__section-title">BINDING AFFINITY SUMMARY</h3>
+                <table class="docking-summary__section-table">
+                    <thead class="docking-summary__section-table-header">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Ligand</th>
+                            <th>Best Affinity (kcal/mol)</th>
+                            <th>Lowest Affinity (kcal/mol)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="docking-summary__section-body">
+                        {% for key, ligand in ligand_result.items %}
+                            <tr>
+                                <td class="col-rank">{{ forloop.counter }}</td>
+                                <td class="col-ligand">{{ key }}</td>
+                                {% if ligand.docking_status == "DOCKED" %}
+                                    <td class="col-affinity numeric">{{ ligand.results.0.affinity }}</td>
+                                    <td class="col-affinity numeric">
+                                        {% for result in ligand.results %}
+                                            {% if forloop.last %}
+                                                {{ result.affinity }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td class="col-status">
+                                        <span class="status-badge status-badge--success">Docked</span>
+                                    </td>
+                                {% elif ligand.docking_status == "FAILED" %}
+                                    <td class="col-affinity numeric">—</td>
+                                    <td class="col-affinity numeric">—</td>
+                                    <td class="col-status">
+                                        <span class="status-badge status-badge--error">Failed</span>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    {% block page_javascript %}
+        <script src="{% static 'js/validateSearchResultQuery.js' %}"></script>
+        <script src="{% static 'js/closeRetentionPolicyBanner.js' %}"></script>
+    {% endblock %}
+{% endblock %}

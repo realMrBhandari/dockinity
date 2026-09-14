@@ -1,0 +1,164 @@
+// FONTS DEFINITION
+$font-sans:
+  "IBM Plex Sans",
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+$font-mono: "IBM Plex Mono", monospace;
+$font-mono-custom: "JetBrains Mono", monospace;
+$font-serif: "IBM Plex Serif", serif;
+$font-hero: "Schibsted Grotesk", sans-serif;
+
+// HEADING VARIABLES
+$font-heading: $font-sans;
+$font-main: $font-sans;
+
+// PAGE & ELEMENT COLOR VARIABLES
+$color-transparent: transparent;
+$color-white: #ffffff;
+$color-black: #000000;
+$page-bg: #fafaf9;
+$surface-bg: #ffffff;
+$surface-subtle: #f5f4f2;
+$surface-elevated: #ffffff;
+$surface-hover-bg: #efeeea;
+$selection-bg-color: #a3d9b1c1;
+$navbar-scrolled-bg: rgba(255, 255, 255, 0.9);
+$border-default: #e5e2dc;
+$border-strong: #c9c5bd;
+$border-strong-light: #d3cec5;
+$header-scrolled-border: #dce2e8;
+
+// TEXT COLOR VARIABLES
+$text-primary: #1a1815;
+$text-secondary: #57534c;
+$text-muted: #78716a;
+$text-subtle: #a39e97;
+$text-label: #1a1815;
+
+// DOCKINITY PRIMARY COLORS
+$brand-primary: #141210;
+$brand-hover: #2b2723;
+$brand-pressed: #000000;
+$brand-soft: #f0efec;
+
+// INTERACTION COLORS
+$accent-sci: #144e1e;
+$accent-sci-soft: #eaf5ee;
+$accent-sci-shadow: rgba(20, 78, 30, 0.2);
+$focus-ring: 0 0 0 3px rgba(20, 78, 30, 0.25);
+
+// HOME PAGE FOOTER SPECIFIC COLORS
+$footer-bg: #0a0a0a;
+$footer-border: rgba(255, 255, 255, 0.1);
+$footer-border-top: rgba(255, 255, 255, 0.15);
+$footer-divider: rgba(255, 255, 255, 0.12);
+$footer-text-desc: #c9c5bd;
+$footer-desc-text: #d6d3ce;
+$footer-link-rest: #a8a29e;
+// $footer-link-hover: #0ea5e9;
+$footer-link-color: #d6d3ce;
+
+// COLORS & COLOR SPECIFIC STYLING VARIABLES FOR HOME PAGE AND PROTEIN RENDER PART
+$hero-bg-alt: #f7f7f5;
+$hero-text: #1a1815;
+$cta-bg: #141210;
+$cta-text: #ffffff;
+$btn-outline-border: #c9c5bd;
+$btn-outline-hover-border: #1a1815;
+$hud-border: #e5e5e2;
+$hud-shadow: 0 35px 70px rgba(0, 0, 0, 0.18);
+$hud-btn-border: rgba(255, 255, 255, 0.2);
+$hud-btn-border-hover: rgba(255, 255, 255, 0.4);
+$hud-glass-bg: rgba(255, 255, 255, 0.6);
+$hud-glass-border: rgba(255, 255, 255, 0.8);
+$hud-glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+$hud-glass-inset: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+$hud-glow-green: rgba(21, 128, 61, 0.15);
+$hud-glow-blue: rgba(226, 97, 31, 0.15);
+$hud-badge-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+$hud-badge-dark-bg: rgba(20, 18, 16, 0.85); /* warm black, was slate */
+$hud-badge-dark-border: rgba(255, 255, 255, 0.1);
+$hud-badge-dark-text: #ffffff;
+$hud-badge-light-bg: rgba(255, 255, 255, 0.85);
+$hud-badge-light-text: #1a1815; /* warm near-black, was slate */
+$hud-badge-light-border: rgba(20, 18, 16, 0.1);
+
+// SEMANTIC COLORS FOR ERROR, WARNING, SUCESS AND INFO
+$semantic-success: #15803d;
+$semantic-success-bg: #eaf5ee;
+$semantic-error: #b3261e;
+$semantic-error-bg: #fbeae8;
+$semantic-warning: #8f6b12;
+$semantic-warning-bg: #faf3de;
+$semantic-info: #44403a;
+$semantic-info-bg: #f0efec;
+$semantic-info-border: #ddd9d2;
+$required-mark: $semantic-error;
+$navbar-hover-bg: #f0efec;
+$navbar-active-hover-bg: #1a1815;
+$navbar-height: 84px;
+$mobile-breakpoint: 768px;
+$excel-btn-bg: #107c41;
+$excel-btn-hover: #0b582e;
+$hero-title-color: #141210;
+$hero-bg-neutral: #f7f7f5;
+$search-wrapper-bg: #fafaf8;
+$search-label-color: #4a4844dd;
+$search-btn-bg: #403f3c;
+$search-wrapper-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+$search-wrapper-shadow-focus: 0 12px 30px rgba(0, 0, 0, 0.08);
+$cta-csv-hover: #1a1815;
+$results-subtitle-color: #15803d;
+$info-banner-bg: #f0efec;
+$info-banner-border: #ddd9d2;
+$banner-close-hover: rgba(0, 0, 0, 0.05);
+
+// SITE BANNER SPECIFIC COLORS
+$banner-queued-bg: #fbeee6;
+$banner-queued-border: #e8a87c;
+$banner-queued-icon: #e8833a;
+$banner-queued-icon-bg: #f7d2bc;
+$banner-failed-bg: #fdf3f2;
+$banner-failed-border: #f2b6b0;
+$banner-failed-icon-bg: #b42318;
+
+// RESULTS PAGE PULSATING DOT COLORS
+$dot-queued-bg: #e8833a;
+$dot-queued-shadow: rgba(194, 91, 20, 0.7);
+$dot-queued-pulse-start: rgba(194, 91, 20, 0.85);
+$dot-queued-pulse-end: rgba(194, 91, 20, 0);
+
+$dot-failed-bg: #b42318;
+$dot-failed-shadow: rgba(180, 35, 24, 0.4);
+$dot-failed-pulse-start: rgba(180, 35, 24, 0.85);
+$dot-failed-pulse-end: rgba(180, 35, 24, 0);
+
+$dot-success-shadow: rgba(21, 128, 61, 0.4);
+$dot-success-pulse-start: rgba(21, 128, 61, 0.85);
+$dot-success-pulse-end: rgba(21, 128, 61, 0);
+
+// RESULTS PAGE SPECIFIC COLORS
+$search-space-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.02);
+$coord-axis-bg: #4a4843;
+$table-header-bg: #4a4843;
+$table-header-border: rgba(255, 255, 255, 0.15);
+$table-row-even-bg: #faf9f7;
+$results-wrapper-bg: #f7f7f5;
+$result-th-header: #4a4843;
+
+// PILL AND PULSATING DOT DIMENSIONS
+$radius-control: 10px;
+$radius-small: 12px;
+$radius-card: 14px;
+$radius-container: 16px;
+$radius-large: 20px;
+$radius-pill: 9999px;
+
+// SOME GENERIC STYLES
+$shadow-default:
+  0 4px 6px -1px rgba(0, 0, 0, 0.05),
+  0 2px 4px -2px rgba(0, 0, 0, 0.05);
+$shadow-hover:
+  0 10px 15px -3px rgba(0, 0, 0, 0.08),
+  0 4px 6px -4px rgba(0, 0, 0, 0.04);
