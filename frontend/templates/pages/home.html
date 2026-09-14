@@ -11,7 +11,7 @@
         Dockinity performs molecular docking for you. Submit your protein and ligand inputs. Get docking scores and predicted binding structures in just few clicks, with no local setup or compute clusters required.
       </p>
       <div class="site-hero__cta">
-        <a href="{% url 'new-docking-request' %}"
+        <a href="{% url 'new-experiment' %}"
            class="site-hero__cta-button no-select">
           <span>Start Docking</span>
           <span class="site-hero__cta-button-icon">
@@ -25,7 +25,7 @@
             </svg>
           </span>
         </a>
-        <a href="{% url 'docking-result_search' %}"
+        <a href="{% url 'search-result' %}"
            class="site-hero__cta-link no-select">Retrieve Results</a>
       </div>
     </div>
@@ -74,8 +74,8 @@
           <p class="site-footer__column-label">SITE</p>
           <div class="site-footer__link-list">
             <a class="site-footer__link" href="{% url 'dockinity-home' %}">Overview</a>
-            <a class="site-footer__link" href="{% url 'new-docking-request' %}">Molecular docking</a>
-            <a class="site-footer__link" href="{% url 'docking-result_search' %}">Results</a>
+            <a class="site-footer__link" href="{% url 'new-experiment' %}">Molecular docking</a>
+            <a class="site-footer__link" href="{% url 'search-result' %}">Results</a>
           </div>
         </div>
         <div>

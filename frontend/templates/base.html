@@ -85,11 +85,10 @@
               <a href="{% url 'dockinity-home' %}" class="navbar__link no-select">Overview</a>
             </li>
             <li class="no-select navbar__item {% if active_page == 'docking' %}navbar__item--active{% endif %}">
-              <a href="{% url 'new-docking-request' %}" class="navbar__link no-select">Molecular Docking</a>
+              <a href="{% url 'new-experiment' %}" class="navbar__link no-select">Molecular Docking</a>
             </li>
             <li class="no-select navbar__item {% if active_page == 'results' %}navbar__item--active{% endif %}">
-              <a href="{% url 'docking-result_search' %}"
-                 class="navbar__link no-select">Results</a>
+              <a href="{% url 'search-result' %}" class="navbar__link no-select">Results</a>
             </li>
             {% comment %} <li class="navbar__item {% if active_page == 'about' %}navbar__item--active{% endif %}">
               <a href="{% url 'docking-result' %}" class="navbar__link">Resources</a>
@@ -120,11 +119,10 @@
               <a href="{% url 'dockinity-home' %}" class="navbar__link no-select">Overview</a>
             </li>
             <li class="navbar__item {% if active_page == 'docking' %}navbar__item--active{% endif %}">
-              <a href="{% url 'new-docking-request' %}" class="navbar__link no-select">Molecular Docking</a>
+              <a href="{% url 'new-experiment' %}" class="navbar__link no-select">Molecular Docking</a>
             </li>
             <li class="navbar__item {% if active_page == 'results' %}navbar__item--active{% endif %}">
-              <a href="{% url 'docking-result_search' %}"
-                 class="navbar__link no-select">Results</a>
+              <a href="{% url 'search-result' %}" class="navbar__link no-select">Results</a>
             </li>
             {% comment %} <li class="navbar__item {% if active_page == 'about' %}navbar__item--active{% endif %}">
               <a href="#" class="navbar__link">Resources</a>

@@ -1,7 +1,7 @@
 // ============================================================
 // CONFIGURATION
 // ============================================================
-const LIGAND_FETCH_URL = "/mol-dock/request/ligand-info";
+const LIGAND_FETCH_URL = "/request/ligand-info";
 const LIGAND_PLACEHOLDERS = ["2737368", "2214", "164648", "5280343"];
 
 // ============================================================
