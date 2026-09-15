@@ -77,6 +77,7 @@
           {% endif %}
         </div>
         {% comment %}?----------- HTMX ZONE ------------{% endcomment %}
+        <script src="{% static 'js/toggleGridBox.js' %}"></script>
         <div class="docking-request__form-element-wrapper">
           <label>Docking Mode & Search Space<span class="docking-request__form-required">*</span></label>
           <div class="help_text">Choose Site-Specific Docking when the binding site is known.</div>
@@ -167,5 +168,4 @@
 {% block page_javascript %}
   <script src="{% static 'js/ligandsOnDemand.js' %}"></script>
   <script src="{% static 'js/disableNumericInputValueIncreaseOnScroll.js' %}"></script>
-  <script src="{% static 'js/toggleGridBox.js' %}"></script>
 {% endblock %}
