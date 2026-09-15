@@ -311,6 +311,10 @@ def receptor_components_input(request):
         request.session["receptor_structure"] = pdb_response_data
 
         context = {"pdb_id": pdb_response_id, "pdb_structure": pdb_response_data}
-        return render(request, "fragments/protein-component-input.html", context)
+        return render(
+            request,
+            "fragments/protein-component-input.html",
+            context,
+        )
 
     return HttpResponse("")

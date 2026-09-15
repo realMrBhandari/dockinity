@@ -20,5 +20,5 @@ Dockinity
         message=message,
         from_email=f"Dockinity <{settings.DEFAULT_FROM_EMAIL}>",
         recipient_list=[experiment.user_email],
-        fail_silently=True,
+        fail_silently=False,
     )
