@@ -1,12 +1,7 @@
-// ============================================================
-// CONFIGURATION
-// ============================================================
 const LIGAND_FETCH_URL = "/request/ligand-info";
-const LIGAND_PLACEHOLDERS = ["2737368", "2214", "164648", "5280343"];
+const LIGAND_PLACEHOLDERS = ["5362440", "92727", "54682461", "2244"];
 
-// ============================================================
 // LIGAND INPUT CONTROLLER
-// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("input-ligands-container");
   const addButton = document.getElementById("add_more_field");
