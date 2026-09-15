@@ -1,43 +1,77 @@
 [build-system]
+
 requires = ["setuptools"]
+
 build-backend = "setuptools.build_meta"
 
 [project]
+
 name = "dockinity"
+
 version = "1.0.0"
+
 requires-python = "~=3.14.0"
+
 dependencies = [
-    asgiref==3.12.1,
-    backoff==2.2.1,
-    certifi==2026.7.22,
-    charset-normalizer==3.5.1,
-    click==8.4.2,
-    colorama==0.4.6,
-    cssbeautifier==2.0.3,
-    distro==1.9.0,
-    Django==6.0.7,
-    django-environ==0.14.0,
-    EditorConfig==0.17.1,
-    idna==3.18,
-    jsbeautifier==2.0.3,
-    json5==0.15.0,
-    pathspec==1.1.1,
-    psycopg==3.3.5,
-    psycopg-binary==3.3.5,
-    PyYAML==6.0.3,
-    regex==2026.7.19,
-    requests==2.34.2,
-    sqlparse==0.5.5,
-    typing_extensions==4.16.0,
-    tzdata==2026.3,
-    urllib3==2.7.0,
+
+    "asgiref==3.12.1",
+
+    "backoff==2.2.1",
+
+    "certifi==2026.7.22",
+
+    "charset-normalizer==3.5.1",
+
+    "click==8.4.2",
+
+    "colorama==0.4.6",
+
+    "cssbeautifier==2.0.3",
+
+    "distro==1.9.0",
+
+    "Django==6.0.7",
+
+    "django-environ==0.14.0",
+
+    "EditorConfig==0.17.1",
+
+    "idna==3.18",
+
+    "jsbeautifier==2.0.3",
+
+    "json5==0.15.0",
+
+    "pathspec==1.1.1",
+
+    "psycopg==3.3.5",
+
+    "psycopg-binary==3.3.5",
+
+    "PyYAML==6.0.3",
+
+    "regex==2026.7.19",
+
+    "requests==2.34.2",
+
+    "sqlparse==0.5.5",
+
+    "typing_extensions==4.16.0",
+
+    "tzdata==2026.3",
+
+    "urllib3==2.7.0",
+
 ]
 
 [tool.setuptools.packages.find]
+
 include = ["config*", "website*"]
 
 [tool.vercel]
+
 pythonVersion = "3.14"
 
 [tool.vercel.scripts]
+
 build = "python manage.py migrate && python manage.py collectstatic --noinput"
