@@ -36,6 +36,7 @@ EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env.int("EMAIL_PORT")
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+DEFAULT_FROM_EMAIL = env("EMAIL_ADDR")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 # Application definition
@@ -65,7 +66,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "frontend" / "templates", BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,8 +86,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": env("POSTGRES_ENGINE"),
+        "NAME": env("POSTGRES_NAME"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env("POSTGRES_PORT"),
     }
 }
 
@@ -115,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
@@ -126,3 +131,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "frontend" / "static",
+]
